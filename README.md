@@ -13,7 +13,7 @@ pip3 install pyyaml
 
 ## Configuration
 1. Create a Github personal access token
-
+2. Create a config.yml file
 ~~~~
 github:
   personal_access_token: 'dfhds;jfhrjhjf;djsf;djhf;jdhfjdfhruywufhwc'
