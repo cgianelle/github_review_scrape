@@ -7,6 +7,10 @@ pip3 install PyGithub
 pip3 install pyyaml
 ~~~~
 
+## Library Documentation
+- https://pygithub.readthedocs.io/en/latest/index.html
+- https://pyyaml.org/wiki/PyYAMLDocumentation
+
 ## Configuration
 1. Create a Github personal access token
 
