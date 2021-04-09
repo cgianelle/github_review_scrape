@@ -1,3 +1,5 @@
+#! /usr/local/bin/python3
+
 from github import Github
 import yaml
 from twilio.rest import Client
@@ -107,4 +109,3 @@ if __name__ == '__main__':
 
     except Exception as e:
         print(e)
-        
