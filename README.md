@@ -32,7 +32,7 @@ twilio:
 ~~~~
 
 ## Execution
-Crontab
+### Crontab
 The setting below runs M-F from 8am until 6PM
 ~~~~
 0 8-18 * * 1-5 cd <path/to/github_review_scrape> && ./pull_request.py
