@@ -1,3 +1,4 @@
+#!/usr/local/bin/python3
 from github import Github
 import yaml
 from twilio.rest import Client
