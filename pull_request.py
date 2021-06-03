@@ -55,11 +55,17 @@ class GithubUtils:
         else:
             self.github = Github(base_url=self.base_url, login_or_token=self.personal_access_token)
 
+    def setPullRequestsToSkip(self, skip_pulls):
+        self.skip_pulls = skip_pulls
+
     def findReviewer(self, repo, user):
         r = self.github.get_repo(repo)
         pulls = r.get_pulls(state='open', sort='created')
         pull_request_titles = []
         for pr in pulls:
+            if self.skip_pulls and pr.number in self.skip_pulls:
+                print("Skipping PR# ${0} - ${1}".format(pr.number, pr.title))
+                continue
             # todo: need to check the assignees array
             if self.__isUserAmongAssignees(user, pr.assignees):
                 pull_request_titles.append(self.__createMesssageTitle(repo,pr))
@@ -85,7 +91,6 @@ class GithubUtils:
         return repo+' PR #'+str(pull_request.number)+": "+pull_request.title
 
 
-
      
 if __name__ == '__main__':
     stream = open("config.yml", 'r')
@@ -98,9 +103,12 @@ if __name__ == '__main__':
         twilio_utils.to_phone_number = dictionary['twilio']['to_phone_number']
         twilio_utils.connectToTwilio()
 
-        for repo in dictionary['github']['repos']:
+        github = dictionary['github']
+        skip_pulls = github['skip_pulls'] if 'skip_pulls' in github else None
+        github_utils.setPullRequestsToSkip(skip_pulls)
+        for repo in github['repos']:
             print("Checking repo",repo)
-            pulls = github_utils.findReviewer(repo, dictionary['github']['login'])
+            pulls = github_utils.findReviewer(repo, github['login'])
             for pull in pulls:
                 print("sending {0}".format(pull))
                 twilio_utils.sendSMS('You have a pending review for:\n'+pull)

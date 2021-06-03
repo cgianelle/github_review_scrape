@@ -31,6 +31,12 @@ twilio:
   auth_token:  '0123456789abcdefghijklmnopqrstuv'
 ~~~~
 
+An optional Github configuration is `skip_pulls`, which allows you to specify any pull requests to not send notifications for. Helpful for PRs that have been parked for one reason or another and you don't need to be constantly reminded about it.
+~~~~
+  skip_pulls:
+    - <PR Number>
+~~~~
+
 ## Execution
 ### Crontab
 The setting below runs M-F from 8am until 6PM
